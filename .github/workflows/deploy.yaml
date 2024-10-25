@@ -1,0 +1,31 @@
+name: Lint, Test & Deply
+on: push
+jobs:
+  lint-step:
+    name: Lint Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm i
+      - name: Lint project
+        run: npm run lint
+  test-step:
+    needs: lint-step
+    name: Test Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm i
+      - name: Test project
+        run: npm run test
+  deploy-project:
+    needs: [lint-step, test-step]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm i
+      - name: Build Project
+        run: npm run build
