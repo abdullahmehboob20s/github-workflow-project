@@ -1,0 +1,9 @@
+name: Automate Issues
+on: issues
+jobs:
+  output-details:
+    name: Output Issue Detail
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Issue Data
+        run: ${{github.event.issue}}
